@@ -8,8 +8,29 @@ MoAD <- cluster_fast_greedy(ADN)
 MoPD <- cluster_fast_greedy(PDN)
 MoMS <- cluster_fast_greedy(MSN)
 
+for(i in 1:length(MoAD)){
+  subA1 <- induced.subgraph(ADN,vids = as.vector(unlist(MoAD[i])))
+  for(j in 1:length(MoPD)){
+    subP1 <- induced.subgraph(PDN,vids = as.vector(unlist(MoPD[j])))
+    
+    if(length(unlist(MoAD[27])) > length(unlist(MoPD[3]))){
+      print("subA1 > subP1")
+      dif <- graph.difference(subA1,subP1)
+    }else if(length(unlist(MoAD[27])) < length(unlist(MoPD[3]))){
+      print("subP1 > subA1")
+      dif <- graph.difference(subP1,subA1)
+    }else{
+      print("subA1 = subP1")
+      dif <- graph.difference(subA1,subP1)
+      if(ecount(dif) == 0 && vcount(dif) == 0){
+        break
+      }
+    }
+  }
+}
+
 subA1 <- induced.subgraph(ADN,vids = as.vector(unlist(MoAD[27])))
-subP1 <- induced.subgraph(PDN,vids = as.vector(unlist(MoPD[3])))
+subP1 <- induced.subgraph(ADN,vids = as.vector(unlist(MoAD[27])))
 
 if(length(unlist(MoAD[27])) > length(unlist(MoPD[3]))){
   print("subA1 > subP1")
