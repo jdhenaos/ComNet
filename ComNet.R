@@ -11,18 +11,22 @@ MoMS <- cluster_fast_greedy(MSN)
 if(length(MoAD) >= length(MoPD)){
   graph1 <- MoAD
   graph2 <- MoPD
+  bigGraph <- ADN
+  smallGraph <- PDN
 }else{
   graph1 <- MoPD
   graph2 <- MoAD
+  bigGraph <- PDN
+  smallGraph <- ADN
 }
 
 iqual <- data.frame()
   
 for(i in 1:length(graph1)){
-  subA <- induced.subgraph(ADN,vids = as.vector(unlist(graph1[i])))
+  subA <- induced.subgraph(bigGraph,vids = as.vector(unlist(graph1[i])))
   
   for(j in 1:length(graph2)){
-    subB <- induced.subgraph(ADN,vids = as.vector(unlist(graph2[j])))
+    subB <- induced.subgraph(smallGraph,vids = as.vector(unlist(graph2[j])))
     
     if(length(names(subA[2])) > length(names(subB[2]))){
       print("subA1 > subP1")
