@@ -8,6 +8,42 @@ MoAD <- cluster_fast_greedy(ADN)
 MoPD <- cluster_fast_greedy(PDN)
 MoMS <- cluster_fast_greedy(MSN)
 
+if(length(MoAD) >= length(MoPD)){
+  graph1 <- MoAD
+  graph2 <- MoPD
+}else{
+  graph1 <- MoPD
+  graph2 <- MoAD
+}
+
+iqual <- data.frame()
+  
+for(i in 1:length(graph1)){
+  subA <- induced.subgraph(ADN,vids = as.vector(unlist(graph1[i])))
+  
+  for(j in 1:length(graph2)){
+    subB <- induced.subgraph(ADN,vids = as.vector(unlist(graph2[j])))
+    
+    if(length(names(subA[2])) > length(names(subB[2]))){
+      print("subA1 > subP1")
+      dif <- graph.difference(subA,subB)
+    }else if(length(names(subA[2])) < length(names(subB[2]))){
+      print("subP1 > subA1")
+      dif <- graph.difference(subB,subA)
+    }else{
+      print("subA1 = subP1")
+      dif <- graph.difference(subA,subB)
+      if(names(subA[2]) == names(subB[2]) && ecount(dif) == 0){
+        if(length(iqual) == 0){
+          iqual <- rbind(names(dif[2]))
+        }else{
+          iqual <- rbind(iqual,names(dif[2]))
+        }
+      }
+    }
+  }
+}
+
 ####################################################
 
 iqual <- data.frame()
