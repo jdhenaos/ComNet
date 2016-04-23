@@ -20,7 +20,7 @@ if(length(MoAD) >= length(MoPD)){
   smallGraph <- ADN
 }
 
-iqual <- data.frame()
+iqual <- c()
   
 for(i in 1:length(graph1)){
   subA <- induced.subgraph(bigGraph,vids = as.vector(unlist(graph1[i])))
@@ -39,9 +39,9 @@ for(i in 1:length(graph1)){
       dif <- graph.difference(subA,subB)
       if(names(subA[2]) == names(subB[2]) && ecount(dif) == 0){
         if(length(iqual) == 0){
-          iqual <- rbind(names(dif[2]))
+          iqual <- c(as.vector(names(dif[2]),mode = "character"))
         }else{
-          iqual <- rbind(iqual,names(dif[2]))
+          iqual <- c(iqual,as.vector(names(dif[2]),mode = "character"))
         }
       }
     }
