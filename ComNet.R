@@ -68,6 +68,14 @@ AvsP2 <- CommonModules(ADN,PDN,method = "walk")
 PvsM2 <- CommonModules(PDN,MSN,method = "walk")
 AvsM2 <- CommonModules(ADN,MSN,method = "walk")
 
+AvsP3 <- CommonModules(ADN,PDN,method = "leig")
+PvsM3 <- CommonModules(PDN,MSN,method = "leig")
+AvsM3 <- CommonModules(ADN,MSN,method = "leig")
+
+AvsP4 <- CommonModules(ADN,PDN,method = "ebet")
+PvsM4 <- CommonModules(PDN,MSN,method = "ebet")
+AvsM4 <- CommonModules(ADN,MSN,method = "ebet")
+
 ####################################################
 
 method = "fgr"
