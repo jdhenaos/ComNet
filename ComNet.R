@@ -1,8 +1,15 @@
 library(igraph)
 
-CommonModules <- function(G1,G2){
-  MoA <- cluster_fast_greedy(G1)
-  MoB <- cluster_fast_greedy(G2)
+CommonModules <- function(G1,G2,method){
+  
+  if(method == "fgr"){
+    MoA <- cluster_fast_greedy(G1)
+    MoB <- cluster_fast_greedy(G2)
+  }else if(method == "ebt"){
+    MoA <- cluster_edge_betweenness(G1,directed = F)
+    MoB <- cluster_edge_betweenness(G2, directed = F)
+  }
+  
   
   if(length(MoA) >= length(MoB)){
     graph1 <- MoA
@@ -45,9 +52,9 @@ ADN <- read.graph("ALZ.txt",format = "ncol")
 PDN <- read.graph("PRK.txt",format = "ncol")
 MSN <- read.graph("ESMU.txt",format = "ncol")
 
-AvsP <- CommonModules(ADN,PDN)
-PvsM <- CommonModules(PDN,MSN)
-AvsM <- CommonModules(ADN,MSN)
+AvsP <- CommonModules(ADN,PDN,method="fgr")
+PvsM <- CommonModules(PDN,MSN,method="fgr")
+AvsM <- CommonModules(ADN,MSN,method="fgr")
 
 ####################################################
 
