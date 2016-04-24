@@ -1,6 +1,6 @@
 library(igraph)
 
-CommonModules <- function(G1,G2,method){
+CommonModules <- function(G1,G2,method,iter=1000){
   
   if(method == "fgr"){
     MoA <- cluster_fast_greedy(G1)
@@ -9,8 +9,8 @@ CommonModules <- function(G1,G2,method){
     MoA <- cluster_edge_betweenness(G1,directed = F)
     MoB <- cluster_edge_betweenness(G2,directed = F)
   }else if(method == "leig"){
-    MoA <- cluster_leading_eigen(G1)
-    MoB <- cluster_leading_eigen(G2)
+    MoA <- cluster_leading_eigen(G1,options = list(maxiter = iter))
+    MoB <- cluster_leading_eigen(G2,options = list(maxiter = iter))
   }else if(method == "walk"){
     MoA <- cluster_walktrap(G1)
     MoB <- cluster_walktrap(G2)
@@ -68,9 +68,9 @@ AvsP2 <- CommonModules(ADN,PDN,method = "walk")
 PvsM2 <- CommonModules(PDN,MSN,method = "walk")
 AvsM2 <- CommonModules(ADN,MSN,method = "walk")
 
-AvsP3 <- CommonModules(ADN,PDN,method = "leig")
-PvsM3 <- CommonModules(PDN,MSN,method = "leig")
-AvsM3 <- CommonModules(ADN,MSN,method = "leig")
+AvsP3 <- CommonModules(ADN,PDN,method = "leig",iter = 50000)
+PvsM3 <- CommonModules(PDN,MSN,method = "leig",iter = 50000)
+AvsM3 <- CommonModules(ADN,MSN,method = "leig",iter = 50000)
 
 AvsP4 <- CommonModules(ADN,PDN,method = "ebet")
 PvsM4 <- CommonModules(PDN,MSN,method = "ebet")
