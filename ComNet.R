@@ -46,6 +46,8 @@ PDN <- read.graph("PRK.txt",format = "ncol")
 MSN <- read.graph("ESMU.txt",format = "ncol")
 
 AvsP <- CommonModules(ADN,PDN)
+PvsM <- CommonModules(PDN,MSN)
+AvsM <- CommonModules(ADN,MSN)
 
 ####################################################
 
