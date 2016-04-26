@@ -86,8 +86,14 @@ common <- function(G1,G2,ModMa,ModMe){
   subA <- induced.subgraph(G1,vids = as.vector(ModMa))
   subB <- induced.subgraph(G2,vids = as.vector(ModMe))
   
-  if(ecount(graph.intersection(subA,subB,keep.all.vertices = F)) == v && 
-     vcount(graph.intersection(subA,subB,keep.all.vertices = F)) == v){
+  if(length(as.vector(ModMa)) > length(as.vector(ModMe))){
+    compare <- subB
+  }else{
+    compare <- subA
+  }
+  
+  if(ecount(graph.intersection(subA,subB,keep.all.vertices = F)) == ecount(compare) && 
+     vcount(graph.intersection(subA,subB,keep.all.vertices = F)) == vcount(compare)){
     return("bien")
   }
 }
@@ -104,12 +110,11 @@ for(i in 1:length(ModA)){
     ModMe <- as.vector(unlist(ModB[j]))
     if(length(ModMa) != length(ModMe)){
       if(is.na(table(ModMa %in% ModMe)[2]) != TRUE && table(ModMa %in% ModMe)[2] == length(ModMe)){
-        
-        print("encontrado")
+        t <- common(G1,G2,ModMa,ModMe)
+        print(t)
       }else if(is.na(table(ModMe %in% ModMa)[2]) != TRUE && table(ModMe %in% ModMa)[2] == length(ModMa)){
-        
-        print("aparecio")
-        stop("algo")
+        t <- common(G1,G2,ModMa,ModMe)
+        print(t)
       }
     }
   }
