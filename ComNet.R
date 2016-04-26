@@ -82,6 +82,16 @@ MEPD <- CommonModules(DAN,MAN,method = "fgr")
 
 ####################################################
 
+common <- function(G1,G2,ModMa,ModMe){
+  subA <- induced.subgraph(G1,vids = as.vector(ModMa))
+  subB <- induced.subgraph(G2,vids = as.vector(ModMe))
+  
+  if(ecount(graph.intersection(subA,subB,keep.all.vertices = F)) == v && 
+     vcount(graph.intersection(subA,subB,keep.all.vertices = F)) == v){
+    return("bien")
+  }
+}
+
 G1 <- ADN
 G2 <- PDN
 
@@ -92,15 +102,14 @@ for(i in 1:length(ModA)){
   ModMa <- as.vector(unlist(ModA[i]))
   for(j in 1:length(ModB)){
     ModMe <- as.vector(unlist(ModB[j]))
-    if(length(ModMa) > length(ModMe)){
+    if(length(ModMa) != length(ModMe)){
       if(is.na(table(ModMa %in% ModMe)[2]) != TRUE && table(ModMa %in% ModMe)[2] == length(ModMe)){
-        subA <- induced.subgraph(G1,vids = as.vector(ModMa))
-        subB <- induced.subgraph(G2,vids = as.vector(ModMe))
+        
         print("encontrado")
-      }
-    }else if(length(ModMa) < length(ModMe)){
-      if(is.na(table(ModMe %in% ModMa)[2]) != TRUE && table(ModMe %in% ModMa)[2] == length(ModMa)){
-        print("Igualmente")
+      }else if(is.na(table(ModMe %in% ModMa)[2]) != TRUE && table(ModMe %in% ModMa)[2] == length(ModMa)){
+        
+        print("aparecio")
+        stop("algo")
       }
     }
   }
