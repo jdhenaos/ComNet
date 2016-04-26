@@ -74,6 +74,19 @@ AvsM4 <- CommonModules(ADN,MSN,method = "ebet")
 
 ####################################################
 
+a <- cluster_fast_greedy(ADN)
+b <- cluster_fast_greedy(MSN)
+
+for(i in mayor){
+  for(j in menor){
+    if(length(mayor[i]) > length(menor[j])){
+      print("mayor")
+    }else{
+      print(menor)
+    }
+  }
+}
+
 method = "fgr"
 
 if(method == "fgr"){
@@ -117,8 +130,6 @@ for(i in 1:length(graph1)){
         dif <- graph.difference(subA,subB)
       }else if(length(names(subA[2])) < length(names(subB[2]))){
         dif <- graph.difference(subB,subA)
-      }else{
-        dif <- graph.difference(subA,subB)
         if(names(subA[2]) == names(subB[2]) && ecount(dif) == 0){
           iqual[[counter]] <- names(dif[2])
           counter <- counter + 1
