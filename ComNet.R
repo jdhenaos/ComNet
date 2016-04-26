@@ -82,8 +82,8 @@ MEPD <- CommonModules(DAN,MAN,method = "fgr")
 
 ####################################################
 
-a <- cluster_fast_greedy(PAN)
-b <- cluster_fast_greedy(DAN)
+a <- cluster_fast_greedy(ADN)
+b <- cluster_fast_greedy(PDN)
 
 if(length(a) >= length(b)){
   mayor <- a
@@ -99,11 +99,9 @@ for(i in 1:length(mayor)){
     d <- as.vector(unlist(menor[j]))
     if(length(c) > length(d)){
       if(is.na(table(c %in% d)[2]) != TRUE && table(c %in% d)[2] == length(d)){
-        print("Encontrado")
-      }
-    }else if(length(c) < length(d)){
-      if(is.na(table(d %in% c)[2]) != TRUE && table(d %in% c)[2] == length(c)){
-        print("Igualmente")
+        print("encontrado")
+        #e <- induced.subgraph(ADN,vids = as.vector(unlist(d)))
+        #f <- induced.subgraph(PDN,vids = as.vector(unlist(c)))
       }
     }
   }
