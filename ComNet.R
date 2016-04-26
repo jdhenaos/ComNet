@@ -74,15 +74,35 @@ AvsM4 <- CommonModules(ADN,MSN,method = "ebet")
 
 ####################################################
 
-a <- cluster_fast_greedy(ADN)
-b <- cluster_fast_greedy(MSN)
+a <- cluster_walktrap(ADN)
+b <- cluster_walktrap(MSN)
 
-for(i in mayor){
-  for(j in menor){
-    if(length(mayor[i]) > length(menor[j])){
-      print("mayor")
+if(length(a) >= length(b)){
+  mayor <- a
+  menor <- b
+}else{
+  mayor <- b
+  menor <- a
+}
+
+for(i in 1:length(mayor)){
+  c <- as.vector(unlist(mayor[i]))
+  for(j in 1:length(menor)){
+    d <- as.vector(unlist(menor[j]))
+    if(length(c) > length(d)){
+      if(is.na(table(d %in% c)[2]) != TRUE){ #&& table(d %in% c)[2] == length(d)){
+        #print("EUREKA")
+      }
+    }else if(length(c) < length(d)){
+      if(is.na(table(c %in% d)[2]) != TRUE){ #&& table(c %in% d)[2] == length(c)){
+        #print("EUREKA")
+      }
     }else{
-      print(menor)
+      if(is.na(table(c %in% d)[2]) != TRUE && table(c %in% d)[2] == length(c)){
+        print(c)
+        print(d)
+        stop
+      }
     }
   }
 }
