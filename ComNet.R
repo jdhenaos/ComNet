@@ -88,20 +88,14 @@ G2 <- PDN
 ModA <- cluster_fast_greedy(G1)
 ModB <- cluster_fast_greedy(G2)
 
-if(length(a) >= length(b)){
-  mayor <- ModA
-  menor <- ModB
-}else{
-  mayor <- ModB
-  menor <- ModA
-}
-
-for(i in 1:length(mayor)){
-  ModMa <- as.vector(unlist(mayor[i]))
-  for(j in 1:length(menor)){
-    ModMe <- as.vector(unlist(menor[j]))
+for(i in 1:length(ModA)){
+  ModMa <- as.vector(unlist(ModA[i]))
+  for(j in 1:length(ModB)){
+    ModMe <- as.vector(unlist(ModB[j]))
     if(length(ModMa) > length(ModMe)){
       if(is.na(table(ModMa %in% ModMe)[2]) != TRUE && table(ModMa %in% ModMe)[2] == length(ModMe)){
+        subA <- induced.subgraph(G1,vids = as.vector(ModMa))
+        subB <- induced.subgraph(G2,vids = as.vector(ModMe))
         print("encontrado")
       }
     }else if(length(ModMa) < length(ModMe)){
