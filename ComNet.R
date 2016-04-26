@@ -93,7 +93,22 @@ if(length(a) >= length(b)){
   menor <- a
 }
 
-
+for(i in 1:length(mayor)){
+  c <- as.vector(unlist(mayor[i]))
+  for(j in 1:length(menor)){
+    d <- as.vector(menor[j])
+    if(length(c) > length(d)){
+      if(is.na(table(c %in% d)[2]) != TRUE && table(c %in% d)[2] == length(d)){
+        print("Encontrado")
+        stop("prueba")
+      }
+    }else if(length(c) < length(d)){
+      if(is.na(table(d %in% c)[2]) != TRUE && table(d %in% c)[2] == length(c)){
+        print("Igualmente")
+      }
+    }
+  }
+}
 
 method = "fgr"
 
