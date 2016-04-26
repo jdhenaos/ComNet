@@ -72,10 +72,18 @@ AvsP4 <- CommonModules(ADN,PDN,method = "ebet")
 PvsM4 <- CommonModules(PDN,MSN,method = "ebet")
 AvsM4 <- CommonModules(ADN,MSN,method = "ebet")
 
+DAN <- read.graph("AD.txt",format = "ncol")
+PAN <- read.graph("PD.txt",format = "ncol")
+MAN <- read.graph("Merge.txt",format = "ncol")
+
+PDAD <- CommonModules(DAN,PAN,method = "fgr")
+MEAD <- CommonModules(DAN,MAN,method = "fgr")
+MEPD <- CommonModules(DAN,MAN,method = "fgr")
+
 ####################################################
 
-a <- cluster_walktrap(ADN)
-b <- cluster_walktrap(MSN)
+a <- cluster_walktrap(PAN)
+b <- cluster_walktrap(DAN)
 
 if(length(a) >= length(b)){
   mayor <- a
@@ -85,27 +93,7 @@ if(length(a) >= length(b)){
   menor <- a
 }
 
-for(i in 1:length(mayor)){
-  c <- as.vector(unlist(mayor[i]))
-  for(j in 1:length(menor)){
-    d <- as.vector(unlist(menor[j]))
-    if(length(c) > length(d)){
-      if(is.na(table(d %in% c)[2]) != TRUE){ #&& table(d %in% c)[2] == length(d)){
-        #print("EUREKA")
-      }
-    }else if(length(c) < length(d)){
-      if(is.na(table(c %in% d)[2]) != TRUE){ #&& table(c %in% d)[2] == length(c)){
-        #print("EUREKA")
-      }
-    }else{
-      if(is.na(table(c %in% d)[2]) != TRUE && table(c %in% d)[2] == length(c)){
-        print(c)
-        print(d)
-        stop
-      }
-    }
-  }
-}
+
 
 method = "fgr"
 
