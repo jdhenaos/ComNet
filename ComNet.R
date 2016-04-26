@@ -82,27 +82,30 @@ MEPD <- CommonModules(DAN,MAN,method = "fgr")
 
 ####################################################
 
-a <- cluster_fast_greedy(ADN)
-b <- cluster_fast_greedy(PDN)
+G1 <- ADN
+G2 <- PDN
+
+ModA <- cluster_fast_greedy(G1)
+ModB <- cluster_fast_greedy(G2)
 
 if(length(a) >= length(b)){
-  mayor <- a
-  menor <- b
+  mayor <- ModA
+  menor <- ModB
 }else{
-  mayor <- b
-  menor <- a
+  mayor <- ModB
+  menor <- ModA
 }
 
 for(i in 1:length(mayor)){
-  c <- as.vector(unlist(mayor[i]))
+  ModMa <- as.vector(unlist(mayor[i]))
   for(j in 1:length(menor)){
-    d <- as.vector(unlist(menor[j]))
-    if(length(c) > length(d)){
-      if(is.na(table(c %in% d)[2]) != TRUE && table(c %in% d)[2] == length(d)){
-        print("Encontrado")
+    ModMe <- as.vector(unlist(menor[j]))
+    if(length(ModMa) > length(ModMe)){
+      if(is.na(table(ModMa %in% ModMe)[2]) != TRUE && table(ModMa %in% ModMe)[2] == length(ModMe)){
+        print("encontrado")
       }
-    }else if(length(c) < length(d)){
-      if(is.na(table(d %in% c)[2]) != TRUE && table(d %in% c)[2] == length(c)){
+    }else if(length(ModMa) < length(ModMe)){
+      if(is.na(table(ModMe %in% ModMa)[2]) != TRUE && table(ModMe %in% ModMa)[2] == length(ModMa)){
         print("Igualmente")
       }
     }
