@@ -99,9 +99,11 @@ for(i in 1:length(mayor)){
     d <- as.vector(unlist(menor[j]))
     if(length(c) > length(d)){
       if(is.na(table(c %in% d)[2]) != TRUE && table(c %in% d)[2] == length(d)){
-        print("encontrado")
-        #e <- induced.subgraph(ADN,vids = as.vector(unlist(d)))
-        #f <- induced.subgraph(PDN,vids = as.vector(unlist(c)))
+        print("Encontrado")
+      }
+    }else if(length(c) < length(d)){
+      if(is.na(table(d %in% c)[2]) != TRUE && table(d %in% c)[2] == length(c)){
+        print("Igualmente")
       }
     }
   }
