@@ -39,11 +39,7 @@ CommonModules <- function(G1,G2,method,iter=1000){
       subB <- induced.subgraph(smallGraph,vids = as.vector(unlist(graph2[j])))
       
       if(ecount(subA) > 0 && ecount(subB) > 0){
-        if(length(names(subA[2])) > length(names(subB[2]))){
-          dif <- graph.difference(subA,subB)
-        }else if(length(names(subA[2])) < length(names(subB[2]))){
-          dif <- graph.difference(subB,subA)
-        }else{
+        if(length(names(subA[2])) == length(names(subB[2]))){
           dif <- graph.difference(subA,subB)
           if(names(subA[2]) == names(subB[2]) && ecount(dif) == 0){
             iqual[[counter]] <- names(dif[2])
