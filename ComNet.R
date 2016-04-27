@@ -52,7 +52,7 @@ CommonModules <- function(G1,G2,method,iter=1000){
   return(iqual)
 }
 
-SubModules <- function(G1,G2){
+SubModules <- function(G1,G2,method,iter=1000){
   common <- function(G1,G2,ModMa,ModMe){
     subA <- induced.subgraph(G1,vids = as.vector(ModMa))
     subB <- induced.subgraph(G2,vids = as.vector(ModMe))
@@ -67,8 +67,19 @@ SubModules <- function(G1,G2){
     return(l)
   }
   
-  ModA <- cluster_fast_greedy(G1)
-  ModB <- cluster_fast_greedy(G2)
+  if(method == "fgr"){
+    ModA <- cluster_fast_greedy(G1)
+    ModB <- cluster_fast_greedy(G2)
+  }else if(method == "ebet"){
+    ModA <- cluster_edge_betweenness(G1,directed = F)
+    ModB <- cluster_edge_betweenness(G2,directed = F)
+  }else if(method == "leig"){
+    ModA <- cluster_leading_eigen(G1,options = list(maxiter = iter))
+    ModB <- cluster_leading_eigen(G2,options = list(maxiter = iter))
+  }else if(method == "walk"){
+    ModA <- cluster_walktrap(G1)
+    ModB <- cluster_walktrap(G2)
+  }
   
   counter <- 1
   total <- list()
@@ -99,7 +110,19 @@ ADN <- read.graph("ALZ.txt",format = "ncol")
 PDN <- read.graph("PRK.txt",format = "ncol")
 MSN <- read.graph("ESMU.txt",format = "ncol")
 
-SubAvsSubP <- SubModules(ADN,PDN)
+SubAvsSubP <- SubModules(ADN,PDN,method = "fgr")
+SubAvsSubM <- SubModules(ADN,MSN,method = "fgr")
+SubPvsSubM <- SubModules(PDN,MSN,method = "fgr")
+
+SubAvsSubP2 <- SubModules(ADN,PDN,method = "walk")
+SubAvsSubM2 <- SubModules(ADN,MSN,method = "walk")
+SubPvsSubM2 <- SubModules(PDN,MSN,method = "walk")
+
+SubAvsSubP3 <- SubModules(ADN,PDN,method = "leig",iter = 50000)
+SubAvsSubM3 <- SubModules(ADN,MSN,method = "leig",iter = 50000)
+SubPvsSubM3 <- SubModules(PDN,MSN,method = "leig",iter = 50000)
+
+################################################################
 
 AvsP <- CommonModules(ADN,PDN,method = "fgr")
 PvsM <- CommonModules(PDN,MSN,method = "fgr")
