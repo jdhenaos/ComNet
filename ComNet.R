@@ -86,16 +86,13 @@ common <- function(G1,G2,ModMa,ModMe){
   subA <- induced.subgraph(G1,vids = as.vector(ModMa))
   subB <- induced.subgraph(G2,vids = as.vector(ModMe))
   
-  if(length(as.vector(ModMa)) > length(as.vector(ModMe))){
-    compare <- subB
-  }else{
-    compare <- subA
-  }
-  
-  if(ecount(graph.intersection(subA,subB,keep.all.vertices = F)) == ecount(compare) && 
-     vcount(graph.intersection(subA,subB,keep.all.vertices = F)) == vcount(compare)){
-    return("bien")
-  }
+  if(ecount(graph.intersection(subA,subB,keep.all.vertices = F)) == ecount(subA) && 
+     vcount(graph.intersection(subA,subB,keep.all.vertices = F)) == vcount(subA)){
+    l <- list(G1=ModMa,G2=ModMe)
+  }else if(ecount(graph.intersection(subA,subB,keep.all.vertices = F)) == ecount(subB) && 
+           vcount(graph.intersection(subA,subB,keep.all.vertices = F)) == vcount(subB)){
+    l <- list(G1=ModMa,G2=ModMe)
+  }return(l)
 }
 
 G1 <- ADN
