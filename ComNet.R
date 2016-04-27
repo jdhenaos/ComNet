@@ -52,9 +52,54 @@ CommonModules <- function(G1,G2,method,iter=1000){
   return(iqual)
 }
 
+SubModules <- function(G1,G2){
+  common <- function(G1,G2,ModMa,ModMe){
+    subA <- induced.subgraph(G1,vids = as.vector(ModMa))
+    subB <- induced.subgraph(G2,vids = as.vector(ModMe))
+    
+    if(ecount(graph.intersection(subA,subB,keep.all.vertices = F)) == ecount(subA) && 
+       vcount(graph.intersection(subA,subB,keep.all.vertices = F)) == vcount(subA)){
+      l <- list(G1=ModMa,G2=ModMe)
+    }else if(ecount(graph.intersection(subA,subB,keep.all.vertices = F)) == ecount(subB) && 
+             vcount(graph.intersection(subA,subB,keep.all.vertices = F)) == vcount(subB)){
+      l <- list(G1=ModMa,G2=ModMe)
+    }
+    return(l)
+  }
+  
+  ModA <- cluster_fast_greedy(G1)
+  ModB <- cluster_fast_greedy(G2)
+  
+  counter <- 1
+  total <- list()
+  
+  for(i in 1:length(ModA)){
+    ModMa <- as.vector(unlist(ModA[i]))
+    for(j in 1:length(ModB)){
+      ModMe <- as.vector(unlist(ModB[j]))
+      if(length(ModMa) != length(ModMe)){
+        if(is.na(table(ModMa %in% ModMe)[2]) != TRUE && table(ModMa %in% ModMe)[2] == length(ModMe)){
+          t <- common(G1,G2,ModMa,ModMe)
+          total[[counter]] <- t
+          counter <- counter + 1
+        }else if(is.na(table(ModMe %in% ModMa)[2]) != TRUE && table(ModMe %in% ModMa)[2] == length(ModMa)){
+          t <- common(G1,G2,ModMa,ModMe)
+          total[[counter]] <- t
+          counter <- counter + 1
+        }
+      }
+    }
+  }
+  return(total)
+}
+
+#################################################################
+
 ADN <- read.graph("ALZ.txt",format = "ncol")
 PDN <- read.graph("PRK.txt",format = "ncol")
 MSN <- read.graph("ESMU.txt",format = "ncol")
+
+SubAvsSubP <- SubModules(ADN,PDN)
 
 AvsP <- CommonModules(ADN,PDN,method = "fgr")
 PvsM <- CommonModules(PDN,MSN,method = "fgr")
@@ -92,7 +137,8 @@ common <- function(G1,G2,ModMa,ModMe){
   }else if(ecount(graph.intersection(subA,subB,keep.all.vertices = F)) == ecount(subB) && 
            vcount(graph.intersection(subA,subB,keep.all.vertices = F)) == vcount(subB)){
     l <- list(G1=ModMa,G2=ModMe)
-  }return(l)
+  }
+  return(l)
 }
 
 G1 <- ADN
@@ -101,6 +147,9 @@ G2 <- PDN
 ModA <- cluster_fast_greedy(G1)
 ModB <- cluster_fast_greedy(G2)
 
+counter <- 1
+total <- list()
+
 for(i in 1:length(ModA)){
   ModMa <- as.vector(unlist(ModA[i]))
   for(j in 1:length(ModB)){
@@ -108,10 +157,12 @@ for(i in 1:length(ModA)){
     if(length(ModMa) != length(ModMe)){
       if(is.na(table(ModMa %in% ModMe)[2]) != TRUE && table(ModMa %in% ModMe)[2] == length(ModMe)){
         t <- common(G1,G2,ModMa,ModMe)
-        print(t)
+        total[[counter]] <- t
+        counter <- counter + 1
       }else if(is.na(table(ModMe %in% ModMa)[2]) != TRUE && table(ModMe %in% ModMa)[2] == length(ModMa)){
         t <- common(G1,G2,ModMa,ModMe)
-        print(t)
+        total[[counter]] <- t
+        counter <- counter + 1
       }
     }
   }
