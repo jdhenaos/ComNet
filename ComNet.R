@@ -157,10 +157,15 @@ MS <- cluster_fast_greedy(MSN)
 for(i in 1:length(AD)){
   for(j in 1:length(PD)){
     for(k in 1:length(MS)){
-      if(length(as.vector(unlist(AD[i]))) != length(as.vector(unlist(PD[j]))) &&
-         length(as.vector(unlist(AD[i]))) != length(as.vector(unlist(MS[k]))) &&
-         length(as.vector(unlist(PD[j]))) != length(as.vector(unlist(MS[k])))){
-        print("existen")
+      if(length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(PD[j]))) &&
+         length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(MS[k])))){
+        if(length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(MS[k])))){
+          if(is.na(table(as.vector(unlist(c)) %in% as.vector(unlist(a)))))
+        }else if(length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(PD[j])))){
+          a <- AD[i]
+          b <- MS[k]
+          c <- PD[j]
+        }
       }
     }
   }
