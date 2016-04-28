@@ -150,6 +150,21 @@ MEPD <- CommonModules(DAN,MAN,method = "fgr")
 
 ####################################################
 
+AD <- cluster_fast_greedy(ADN)
+PD <- cluster_fast_greedy(PDN)
+MS <- cluster_fast_greedy(MSN)
+
+for(i in 1:length(AD)){
+  for(j in 1:length(PD)){
+    for(k in 1:length(MS)){
+      if(length(as.vector(unlist(AD[i]))) != length(as.vector(unlist(PD[j]))) &&
+         length(as.vector(unlist(AD[i]))) != length(as.vector(unlist(MS[k]))) &&
+         length(as.vector(unlist(PD[j]))) != length(as.vector(unlist(MS[k])))){
+        print("existen")
+      }
+    }
+  }
+}
 
 ####################################################
 common <- function(G1,G2,ModMa,ModMe){
