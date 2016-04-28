@@ -150,6 +150,8 @@ MEPD <- CommonModules(DAN,MAN,method = "fgr")
 
 ####################################################
 
+
+####################################################
 common <- function(G1,G2,ModMa,ModMe){
   subA <- induced.subgraph(G1,vids = as.vector(ModMa))
   subB <- induced.subgraph(G2,vids = as.vector(ModMe))
@@ -192,57 +194,3 @@ for(i in 1:length(ModA)){
 }
 
 ###############################################################################
-
-method = "fgr"
-
-if(method == "fgr"){
-  MoA <- cluster_fast_greedy(ADN)
-  MoB <- cluster_fast_greedy(PDN)
-}else if(method == "ebet"){
-  MoA <- cluster_edge_betweenness(G1,directed = F)
-  MoB <- cluster_edge_betweenness(G2,directed = F)
-}else if(method == "leig"){
-  MoA <- cluster_leading_eigen(ADN)
-  MoB <- cluster_leading_eigen(PDN)
-}else if(method == "walk"){
-  MoA <- cluster_walktrap(G1)
-  MoB <- cluster_walktrap(G2)
-}
-
-
-if(length(MoA) >= length(MoB)){
-  graph1 <- MoA
-  graph2 <- MoB
-  bigGraph <- ADN
-  smallGraph <- PDN
-}else{
-  graph1 <- MoB
-  graph2 <- MoA
-  bigGraph <- PDN
-  smallGraph <- ADN
-}
-
-iqual <- vector(mode = 'list')
-counter <- 1
-
-for(i in 1:length(graph1)){
-  subA <- induced.subgraph(bigGraph,vids = as.vector(unlist(graph1[i])))
-  
-  for(j in 1:length(graph2)){
-    subB <- induced.subgraph(smallGraph,vids = as.vector(unlist(graph2[j])))
-    
-    if(ecount(subA) > 0 && ecount(subB) > 0){
-      if(length(names(subA[2])) > length(names(subB[2]))){
-        dif <- graph.difference(subA,subB)
-      }else if(length(names(subA[2])) < length(names(subB[2]))){
-        dif <- graph.difference(subB,subA)
-        if(names(subA[2]) == names(subB[2]) && ecount(dif) == 0){
-          iqual[[counter]] <- names(dif[2])
-          counter <- counter + 1
-        }
-      }
-    }
-  }
-}
-
-####################################################
