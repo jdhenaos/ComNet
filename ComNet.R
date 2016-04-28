@@ -187,7 +187,7 @@ for(i in 1:length(AD)){
               table(as.vector(unlist(AD[i])) %in% as.vector(unlist(PD[j])))[2] == length(as.vector(unlist(PD[j])))) && 
              (is.na(table(as.vector(unlist(MS[k])) %in% as.vector(unlist(AD[i])))[2]) != TRUE && 
               table(as.vector(unlist(MS[k])) %in% as.vector(unlist(AD[i])))[2] == length(as.vector(unlist(AD[i]))))){
-            print("existe")
+            print("3")
           }
         }else if(length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(AD[i])))){
           if((is.na(table(as.vector(unlist(AD[i])) %in% as.vector(unlist(PD[j])))[2]) != TRUE && 
@@ -196,8 +196,15 @@ for(i in 1:length(AD)){
               table(as.vector(unlist(MS[k])) %in% as.vector(unlist(PD[j])))[2] == length(as.vector(unlist(PD[j])))) && 
              (is.na(table(as.vector(unlist(AD[i])) %in% as.vector(unlist(MS[k])))[2]) != TRUE && 
               table(as.vector(unlist(AD[i])) %in% as.vector(unlist(MS[k])))[2] == length(as.vector(unlist(MS[k]))))){
-            print("aparece")
+            print("4")
           }
+        }
+      }else if(length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(PD[j]))) &&
+               length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(AD[i])))){
+        if(length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(AD[i])))){
+          print("existe")
+        }else if(length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(PD[j])))){
+          print("Aparece")
         }
       }
     }
