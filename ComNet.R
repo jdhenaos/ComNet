@@ -169,12 +169,6 @@ for(i in 1:length(AD)){
           }
         }else if(length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(PD[j])))){
           if(length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(MS[k])))){
-            if(length(as.vector(unlist(AD[i]))) <= 10 && length(as.vector(unlist(PD[j]))) <= 10 && length(as.vector(unlist(MS[k]))) <= 10){
-              a <- PD[j]
-              b <- AD[i]
-              c <- MS[k]
-              stop("encontrado")
-            }
           if((is.na(table(as.vector(unlist(PD[j])) %in% as.vector(unlist(AD[i])))[2]) != TRUE && 
               table(as.vector(unlist(PD[j])) %in% as.vector(unlist(AD[i])))[2] == length(as.vector(unlist(AD[i])))) &&
              (is.na(table(as.vector(unlist(MS[k])) %in% as.vector(unlist(AD[i])))[2]) != TRUE && 
@@ -196,6 +190,12 @@ for(i in 1:length(AD)){
             print("3")
           }
         }else if(length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(AD[i])))){
+          if(length(as.vector(unlist(AD[i]))) <= 10 && length(as.vector(unlist(PD[j]))) <= 10 && length(as.vector(unlist(MS[k]))) <= 10){
+            a <- PD[j]
+            b <- AD[i]
+            c <- MS[k]
+            stop("encontrado")
+          }
           if((is.na(table(as.vector(unlist(AD[i])) %in% as.vector(unlist(PD[j])))[2]) != TRUE && 
               table(as.vector(unlist(AD[i])) %in% as.vector(unlist(PD[j])))[2] == length(as.vector(unlist(PD[j])))) &&
              (is.na(table(as.vector(unlist(MS[k])) %in% as.vector(unlist(PD[j])))[2]) != TRUE && 
