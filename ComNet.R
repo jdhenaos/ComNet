@@ -160,11 +160,23 @@ for(i in 1:length(AD)){
       if(length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(PD[j]))) &&
          length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(MS[k])))){
         if(length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(MS[k])))){
-          if(is.na(table(as.vector(unlist(c)) %in% as.vector(unlist(a)))))
+          if((is.na(table(as.vector(unlist(MS[k])) %in% as.vector(unlist(AD[i])))[2]) != TRUE && 
+             table(as.vector(unlist(MS[k])) %in% as.vector(unlist(AD[i])))[2] == length(as.vector(unlist(AD[i])))) &&
+             (is.na(table(as.vector(unlist(PD[j])) %in% as.vector(unlist(AD[i])))[2]) != TRUE && 
+              table(as.vector(unlist(PD[j])) %in% as.vector(unlist(AD[i])))[2] == length(as.vector(unlist(AD[i])))) && 
+             (is.na(table(as.vector(unlist(MS[k])) %in% as.vector(unlist(PD[j])))[2]) != TRUE && 
+              table(as.vector(unlist(MS[k])) %in% as.vector(unlist(PD[j])))[2] == length(as.vector(unlist(PD[j]))))){
+            print("existe")
+          }
         }else if(length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(PD[j])))){
-          a <- AD[i]
-          b <- MS[k]
-          c <- PD[j]
+          if((is.na(table(as.vector(unlist(PD[j])) %in% as.vector(unlist(AD[i])))[2]) != TRUE && 
+              table(as.vector(unlist(PD[j])) %in% as.vector(unlist(AD[i])))[2] == length(as.vector(unlist(AD[i])))) &&
+             (is.na(table(as.vector(unlist(MS[k])) %in% as.vector(unlist(AD[i])))[2]) != TRUE && 
+              table(as.vector(unlist(MS[k])) %in% as.vector(unlist(AD[i])))[2] == length(as.vector(unlist(AD[i])))) && 
+             (is.na(table(as.vector(unlist(PD[j])) %in% as.vector(unlist(MS[k])))[2]) != TRUE && 
+              table(as.vector(unlist(PD[j])) %in% as.vector(unlist(MS[k])))[2] == length(as.vector(unlist(MS[k]))))){
+            print("aparece")
+          }
         }
       }
     }
