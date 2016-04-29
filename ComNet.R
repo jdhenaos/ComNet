@@ -150,6 +150,14 @@ MEPD <- CommonModules(DAN,MAN,method = "fgr")
 
 ####################################################
 
+SubC <- function(Ma,Md,Me){
+  if(is.na(table(as.vector(unlist(a)) %in% as.vector(unlist(c)))[2]) != TRUE &&
+     is.na(table(as.vector(unlist(a)) %in% as.vector(unlist(b)))[2]) != TRUE &&
+     is.na(table(as.vector(unlist(c)) %in% as.vector(unlist(b)))[2]) != TRUE){
+    return("existe")
+  }
+}
+
 AD <- cluster_fast_greedy(ADN)
 PD <- cluster_fast_greedy(PDN)
 MS <- cluster_fast_greedy(MSN)
@@ -160,33 +168,27 @@ for(i in 1:length(AD)){
       if((length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(PD[j]))) &&
          length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(MS[k])))) &&
          length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(PD[j])))){
-        print("1")
+        t <- SubC(PD[j],MS[k],AD[i])
       }else if((length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(PD[j]))) &&
                 length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(MS[k])))) &&
                length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(MS[k])))){
-        print("2")
+        t <- SubC(MS[k],PD[j],AD[i])
       }else if((length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(AD[i]))) &&
                 length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(MS[k])))) &&
                length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(MS[k])))){
-        print("3")
+        t <- SubC(MS[k],AD[i],PD[j])
       }else if((length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(AD[i]))) &&
                 length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(MS[k])))) &&
                length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(AD[i])))){
-        print("4")
+        t <- SubC(AD[i],MS[k],PD[j])
       }else if((length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(AD[i]))) &&
                 length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(PD[j])))) &&
                length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(AD[i])))){
-        print("5")
+        t <- SubC(AD[i],PD[j],MS[k])
       }else if((length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(AD[i]))) &&
                 length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(PD[j])))) &&
                length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(PD[j])))){
-        if(length(as.vector(unlist(MS[k]))) <= 10 && length(as.vector(unlist(PD[j]))) <= 10
-           && length(as.vector(unlist(AD[i]))) <= 10){
-          a <- PD[j]
-          b <- AD[i]
-          c <- MS[k]
-          stop("break")
-        }
+        t <- SubC(PD[j],AD[i],MS[k])
       }
     }
   }
