@@ -151,9 +151,15 @@ MEPD <- CommonModules(DAN,MAN,method = "fgr")
 ####################################################
 
 SubC <- function(Ma,Md,Me){
-  if(is.na(table(as.vector(unlist(Ma)) %in% as.vector(unlist(Me)))[2]) != TRUE &&
-     is.na(table(as.vector(unlist(Ma)) %in% as.vector(unlist(Md)))[2]) != TRUE &&
-     is.na(table(as.vector(unlist(Md)) %in% as.vector(unlist(Me)))[2]) != TRUE){
+  if((is.na(table(as.vector(unlist(Ma)) %in% as.vector(unlist(Me)))[2]) != TRUE &&
+      table(as.vector(unlist(Ma)) %in% as.vector(unlist(Me)))[2] == length(as.vector(Me)))
+     &&
+     (is.na(table(as.vector(unlist(Ma)) %in% as.vector(unlist(Md)))[2]) != TRUE &&
+      table(as.vector(unlist(Ma)) %in% as.vector(unlist(Me)))[2] == length(as.vector(Md)))
+     &&
+     (is.na(table(as.vector(unlist(Md)) %in% as.vector(unlist(Me)))[2]) != TRUE &&
+      table(as.vector(unlist(Md)) %in% as.vector(unlist(Me)))[2] == length(as.vector(Me)))
+     ){
     return("existe")
   }
 }
