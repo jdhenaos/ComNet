@@ -164,11 +164,15 @@ for(i in 1:length(AD)){
       }else if((length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(PD[j]))) &&
                 length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(MS[k])))) &&
                length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(MS[k])))){
-        if(length(as.vector(unlist(AD[i]))) <= 10 && length(as.vector(unlist(PD[j]))) <= 10
-           && length(as.vector(unlist(MS[k]))) <= 10){
-          d <- AD[i]
-          e <- MS[k]
-          f <- PD[j]
+        print("2")
+      }else if((length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(AD[i]))) &&
+                length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(MS[k])))) &&
+               length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(MS[k])))){
+        if(length(as.vector(unlist(PD[j]))) <= 10 && length(as.vector(unlist(AD[i]))) <= 10
+           && length(as.vector(unlist(MS[k])))){
+          a <- MS[k]
+          b <- AD[i]
+          c <- PD[j]
           stop("break")
         }
       }
