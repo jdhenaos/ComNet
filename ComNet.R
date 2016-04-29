@@ -157,74 +157,15 @@ MS <- cluster_fast_greedy(MSN)
 for(i in 1:length(AD)){
   for(j in 1:length(PD)){
     for(k in 1:length(MS)){
-      if(length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(PD[j]))) &&
-         length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(MS[k])))){
-          if((is.na(table(as.vector(unlist(MS[k])) %in% as.vector(unlist(AD[i])))[2]) != TRUE && 
-             table(as.vector(unlist(MS[k])) %in% as.vector(unlist(AD[i])))[2] == length(as.vector(unlist(AD[i])))) &&
-             (is.na(table(as.vector(unlist(PD[j])) %in% as.vector(unlist(AD[i])))[2]) != TRUE && 
-              table(as.vector(unlist(PD[j])) %in% as.vector(unlist(AD[i])))[2] == length(as.vector(unlist(AD[i])))) && 
-             (is.na(table(as.vector(unlist(MS[k])) %in% as.vector(unlist(PD[j])))[2]) != TRUE && 
-              table(as.vector(unlist(MS[k])) %in% as.vector(unlist(PD[j])))[2] == length(as.vector(unlist(PD[j]))))){
-            print("1")
-          }
-        }else if(length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(PD[j])))){
-          if(length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(MS[k])))){
-          if((is.na(table(as.vector(unlist(PD[j])) %in% as.vector(unlist(AD[i])))[2]) != TRUE && 
-              table(as.vector(unlist(PD[j])) %in% as.vector(unlist(AD[i])))[2] == length(as.vector(unlist(AD[i])))) &&
-             (is.na(table(as.vector(unlist(MS[k])) %in% as.vector(unlist(AD[i])))[2]) != TRUE && 
-              table(as.vector(unlist(MS[k])) %in% as.vector(unlist(AD[i])))[2] == length(as.vector(unlist(AD[i])))) && 
-             (is.na(table(as.vector(unlist(PD[j])) %in% as.vector(unlist(MS[k])))[2]) != TRUE && 
-              table(as.vector(unlist(PD[j])) %in% as.vector(unlist(MS[k])))[2] == length(as.vector(unlist(MS[k]))))){
-            print("2")
-          }
-        }
-      }else if(length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(AD[i]))) &&
-               length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(MS[k])))){
-        if(length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(MS[k])))){
-          if((is.na(table(as.vector(unlist(MS[k])) %in% as.vector(unlist(PD[j])))[2]) != TRUE && 
-              table(as.vector(unlist(MS[k])) %in% as.vector(unlist(PD[j])))[2] == length(as.vector(unlist(PD[j])))) &&
-             (is.na(table(as.vector(unlist(AD[i])) %in% as.vector(unlist(PD[j])))[2]) != TRUE && 
-              table(as.vector(unlist(AD[i])) %in% as.vector(unlist(PD[j])))[2] == length(as.vector(unlist(PD[j])))) && 
-             (is.na(table(as.vector(unlist(MS[k])) %in% as.vector(unlist(AD[i])))[2]) != TRUE && 
-              table(as.vector(unlist(MS[k])) %in% as.vector(unlist(AD[i])))[2] == length(as.vector(unlist(AD[i]))))){
-            print("3")
-          }
-        }else if(length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(AD[i])))){
-          if(length(as.vector(unlist(AD[i]))) <= 10 && length(as.vector(unlist(PD[j]))) <= 10 && length(as.vector(unlist(MS[k]))) <= 10){
-            a <- PD[j]
-            b <- AD[i]
-            c <- MS[k]
-            stop("encontrado")
-          }
-          if((is.na(table(as.vector(unlist(AD[i])) %in% as.vector(unlist(PD[j])))[2]) != TRUE && 
-              table(as.vector(unlist(AD[i])) %in% as.vector(unlist(PD[j])))[2] == length(as.vector(unlist(PD[j])))) &&
-             (is.na(table(as.vector(unlist(MS[k])) %in% as.vector(unlist(PD[j])))[2]) != TRUE && 
-              table(as.vector(unlist(MS[k])) %in% as.vector(unlist(PD[j])))[2] == length(as.vector(unlist(PD[j])))) && 
-             (is.na(table(as.vector(unlist(AD[i])) %in% as.vector(unlist(MS[k])))[2]) != TRUE && 
-              table(as.vector(unlist(AD[i])) %in% as.vector(unlist(MS[k])))[2] == length(as.vector(unlist(MS[k]))))){
-            print("4")
-          }
-        }
-      }else if(length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(PD[j]))) &&
-               length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(AD[i])))){
-        if(length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(AD[i])))){
-          if((is.na(table(as.vector(unlist(AD[i])) %in% as.vector(unlist(MS[k])))[2]) != TRUE && 
-              table(as.vector(unlist(AD[i])) %in% as.vector(unlist(MS[k])))[2] == length(as.vector(unlist(MS[k])))) &&
-             (is.na(table(as.vector(unlist(PD[j])) %in% as.vector(unlist(MS[k])))[2]) != TRUE && 
-              table(as.vector(unlist(PD[j])) %in% as.vector(unlist(MS[k])))[2] == length(as.vector(unlist(MS[k])))) && 
-             (is.na(table(as.vector(unlist(AD[i])) %in% as.vector(unlist(PD[j])))[2]) != TRUE && 
-              table(as.vector(unlist(AD[i])) %in% as.vector(unlist(PD[j])))[2] == length(as.vector(unlist(PD[j]))))){
-            print("existe")
-          }
-        }else if(length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(PD[j])))){
-          if((is.na(table(as.vector(unlist(PD[j])) %in% as.vector(unlist(MS[k])))[2]) != TRUE && 
-              table(as.vector(unlist(PD[j])) %in% as.vector(unlist(MS[k])))[2] == length(as.vector(unlist(MS[k])))) &&
-             (is.na(table(as.vector(unlist(AD[i])) %in% as.vector(unlist(MS[k])))[2]) != TRUE && 
-              table(as.vector(unlist(AD[i])) %in% as.vector(unlist(MS[k])))[2] == length(as.vector(unlist(MS[k])))) && 
-             (is.na(table(as.vector(unlist(PD[j])) %in% as.vector(unlist(AD[i])))[2]) != TRUE && 
-              table(as.vector(unlist(PD[j])) %in% as.vector(unlist(AD[i])))[2] == length(as.vector(unlist(AD[i]))))){
-            print("aparece")
-          }
+      if((length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(PD[j]))) &&
+         length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(MS[k])))) &&
+         length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(PD[j])))){
+        if(length(as.vector(unlist(AD[i]))) <= 10 && length(as.vector(unlist(PD[j]))) <= 10
+           && length(as.vector(unlist(MS[k]))) <= 10){
+          a <- PD[j]
+          b <- MS[k]
+          c <- AD[i]
+          stop("break")
         }
       }
     }
