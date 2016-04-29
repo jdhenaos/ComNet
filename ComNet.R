@@ -185,6 +185,7 @@ for(i in 1:length(AD)){
           a <- PD[j]
           b <- AD[i]
           c <- MS[k]
+          stop("break")
         }
       }
     }
