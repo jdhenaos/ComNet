@@ -168,12 +168,23 @@ for(i in 1:length(AD)){
       }else if((length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(AD[i]))) &&
                 length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(MS[k])))) &&
                length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(MS[k])))){
-        if(length(as.vector(unlist(PD[j]))) <= 10 && length(as.vector(unlist(AD[i]))) <= 10
-           && length(as.vector(unlist(MS[k])))){
-          a <- MS[k]
+        print("3")
+      }else if((length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(AD[i]))) &&
+                length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(MS[k])))) &&
+               length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(AD[i])))){
+        print("4")
+      }else if((length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(AD[i]))) &&
+                length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(PD[j])))) &&
+               length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(AD[i])))){
+        print("5")
+      }else if((length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(AD[i]))) &&
+                length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(PD[j])))) &&
+               length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(PD[j])))){
+        if(length(as.vector(unlist(MS[k]))) <= 10 && length(as.vector(unlist(PD[j]))) <= 10
+           && length(as.vector(unlist(AD[i]))) <= 10){
+          a <- PD[j]
           b <- AD[i]
-          c <- PD[j]
-          stop("break")
+          c <- MS[k]
         }
       }
     }
