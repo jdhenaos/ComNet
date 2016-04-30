@@ -160,9 +160,16 @@ SubC <- function(Ma,Md,Me,L,M,S){
      (is.na(table(as.vector(unlist(Md)) %in% as.vector(unlist(Me)))[2]) != TRUE &&
       table(as.vector(unlist(Md)) %in% as.vector(unlist(Me)))[2] == length(as.vector(Me)))
      ){
+    NMa <- induced.subgraph(L,vids = as.vector(unlist(Ma)))
+    NMd <- induced.subgraph(M,vids = as.vector(unlist(Md)))
+    NMe <- induced.subgraph(S,vids = as.vector(unlist(Me)))
     
+    if(ecount(graph.intersection(NMa,NMd,NMe,keep.all.vertices = FALSE)) == ecount(NMe)
+       &&
+       vcount(graph.intersection(NMa,NMd,NMe,keep.all.vertices = FALSE)) == vcount(NMe)){
+      return("existe")
+    }
   }
-  return(l)
 }
 
 AD <- cluster_walktrap(ADN)
