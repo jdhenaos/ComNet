@@ -176,6 +176,9 @@ for(i in 1:length(AD)){
          length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(PD[j])))){
         t <- SubC(PD[j],MS[k],AD[i])
         if(is.null(t) != TRUE){
+          a <- AD[i]
+          b <- PD[j]
+          c <- MS[k]
           stop("aparecio")
         }
       }else if((length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(PD[j]))) &&
@@ -183,6 +186,9 @@ for(i in 1:length(AD)){
                length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(MS[k])))){
         t <- SubC(MS[k],PD[j],AD[i])
         if(is.null(t) != TRUE){
+          a <- AD[i]
+          b <- PD[j]
+          c <- MS[k]
           stop("aparecio")
         }
       }else if((length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(AD[i]))) &&
@@ -190,6 +196,9 @@ for(i in 1:length(AD)){
                length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(MS[k])))){
         t <- SubC(MS[k],AD[i],PD[j])
         if(is.null(t) != TRUE){
+          a <- AD[i]
+          b <- PD[j]
+          c <- MS[k]
           stop("aparecio")
         }
       }else if((length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(AD[i]))) &&
@@ -197,6 +206,9 @@ for(i in 1:length(AD)){
                length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(AD[i])))){
         t <- SubC(AD[i],MS[k],PD[j])
         if(is.null(t) != TRUE){
+          a <- AD[i]
+          b <- PD[j]
+          c <- MS[k]
           stop("aparecio")
         }
       }else if((length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(AD[i]))) &&
@@ -204,6 +216,9 @@ for(i in 1:length(AD)){
                length(as.vector(unlist(PD[j]))) < length(as.vector(unlist(AD[i])))){
         t <- SubC(AD[i],PD[j],MS[k])
         if(is.null(t) != TRUE){
+          a <- AD[i]
+          b <- PD[j]
+          c <- MS[k]
           stop("aparecio")
         }
       }else if((length(as.vector(unlist(MS[k]))) < length(as.vector(unlist(AD[i]))) &&
@@ -211,6 +226,9 @@ for(i in 1:length(AD)){
                length(as.vector(unlist(AD[i]))) < length(as.vector(unlist(PD[j])))){
         t <- SubC(PD[j],AD[i],MS[k])
         if(is.null(t) != TRUE){
+          a <- AD[i]
+          b <- PD[j]
+          c <- MS[k]
           stop("aparecio")
         }
       }
