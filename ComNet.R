@@ -168,9 +168,11 @@ SubC <- function(Ma,Md,Me,L,M,S){
        &&
        vcount(graph.intersection(NMa,NMd,NMe,keep.all.vertices = FALSE)) == vcount(NMe)){
       l <- list(Ma,Md,Me)
+      return(l)
     }
+  }else{
+   return(NULL) 
   }
-  return(l)
 }
 
 AD <- cluster_walktrap(ADN)
